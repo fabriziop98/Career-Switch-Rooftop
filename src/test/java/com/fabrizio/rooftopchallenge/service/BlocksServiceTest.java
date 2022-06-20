@@ -59,7 +59,7 @@ public class BlocksServiceTest {
             assertEquals("block1block2block3", response);
             
             verify(environment).getProperty(anyString());
-            verify(callApiUtils, times(2)).postMapObjectWithQueryParams(anyString(), anyMap());
+            verify(callApiUtils, times(1)).postMapObjectWithQueryParams(anyString(), anyMap());
             
         }
 
