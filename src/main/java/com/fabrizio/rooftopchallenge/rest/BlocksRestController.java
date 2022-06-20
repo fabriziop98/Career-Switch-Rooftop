@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,19 +35,19 @@ public class BlocksRestController {
     private TokenService tokenService;
 
     @GetMapping
-    public ResponseEntity<?> getBlocks() throws WebException {
+    public ResponseEntity<?> getBlocks(@RequestAttribute(required = false) String email) throws WebException {
         //First, check for valid token authentication. If it's not valid, exception is thrown.
-        Map<String,String> token = tokenService.getRooftopToken(environment.getProperty("user-email"));
+        Map<String,String> token = tokenService.getRooftopToken(email != null ? email : environment.getProperty("user-email"));
 
         //Get blocks for given token and convert from arrayList to array
         return new ResponseEntity<>(blocksService.getBlocks(token.get("token")), HttpStatus.OK);
     }
 
     @GetMapping("/check")
-    public ResponseEntity<?> checkAndGetBlocks() throws WebException {
+    public ResponseEntity<?> checkAndGetBlocks(@RequestAttribute(required = false) String email) throws WebException {
 
         //First, check for valid token authentication. If it's not valid, exception is thrown.
-        Map<String,String> token = tokenService.getRooftopToken(environment.getProperty("user-email"));
+        Map<String,String> token = tokenService.getRooftopToken(email != null ? email : environment.getProperty("user-email"));
 
         //Get blocks for given token and convert from arrayList to array
         BlocksResponseDTO dto = blocksService.getBlocks(token.get("token"));
@@ -57,10 +58,10 @@ public class BlocksRestController {
     }
 
     @PostMapping("/check")
-    public ResponseEntity<?> checkBlocks(@RequestBody String[] blocks) throws WebException {
+    public ResponseEntity<?> checkBlocks(@RequestBody String[] blocks, @RequestAttribute(required = false) String email) throws WebException {
 
         //First, check for valid token authentication. If it's not valid, exception is thrown.
-        Map<String,String> token = tokenService.getRooftopToken(environment.getProperty("user-email"));
+        Map<String,String> token = tokenService.getRooftopToken(email != null ? email : environment.getProperty("user-email"));
 
         return new ResponseEntity<>(blocksService.check(blocks, token.get("token")), HttpStatus.OK);
     }
