@@ -1,9 +1,9 @@
 # Career-Switch-Rooftop
 
-Java version = 1.8
-Packaging = WAR
-Container = Tomcat
-Package manager = MAVEN
+Java version = 1.8 ,
+Packaging = WAR ,
+Container = Tomcat ,
+Package manager = MAVEN ,
 Framework = Springboot 2.7
 
 Postman collection:
