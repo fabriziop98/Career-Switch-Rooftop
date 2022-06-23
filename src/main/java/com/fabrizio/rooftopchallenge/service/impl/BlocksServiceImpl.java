@@ -16,6 +16,7 @@ import com.fabrizio.rooftopchallenge.dto.BlocksResponseDTO;
 import com.fabrizio.rooftopchallenge.exception.WebException;
 import com.fabrizio.rooftopchallenge.service.BlocksService;
 import com.fabrizio.rooftopchallenge.utils.CallApiUtils;
+import com.fabrizio.rooftopchallenge.utils.Constants;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -38,7 +39,7 @@ public class BlocksServiceImpl implements BlocksService {
         blocksArray = new ArrayList<>(blocksArray);
         if(blocksArray == null || blocksArray.isEmpty()) throw new WebException("The given blocks are not valid");
 
-        String checkApiUrl = environment.getProperty("check-blocks").concat(token);
+        String checkApiUrl = environment.getProperty(Constants.check_blocks).concat(token);
 
         List<String> orderedBlocks = new ArrayList<>();
         //We asume that the first element is ordered
@@ -85,7 +86,7 @@ public class BlocksServiceImpl implements BlocksService {
         BlocksResponseDTO dto = new BlocksResponseDTO();
 
         //Call /blocks API with valid token and get raw response.
-        String blocksApiUrl = environment.getProperty("get-blocks").concat(token);
+        String blocksApiUrl = environment.getProperty(Constants.get_blocks).concat(token);
         Map<String, Object> blocksResponse = callApiUtils.getMapObjectWithQueryParams(blocksApiUrl); 
 
         //Check for valid response 

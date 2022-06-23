@@ -31,8 +31,8 @@ public class CallApiUtils {
         Map<String,Object> response = new HashMap<>();
         try (CloseableHttpClient httpclient = HttpClientBuilder.create().build();) {
             HttpGet httpGet = new HttpGet(serviceUrl);
-            httpGet.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
-            httpGet.setHeader(HttpHeaders.ACCEPT, "application/json");
+            httpGet.setHeader(HttpHeaders.CONTENT_TYPE, Constants.application_json);
+            httpGet.setHeader(HttpHeaders.ACCEPT, Constants.application_json);
 
             ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
                 @Override
@@ -40,7 +40,7 @@ public class CallApiUtils {
                     int status = response.getStatusLine().getStatusCode();
                     if (status == 200) {
                         HttpEntity entity = response.getEntity();
-                        return entity != null ? EntityUtils.toString(entity, "UTF-8") : null;
+                        return entity != null ? EntityUtils.toString(entity, Constants.UTF_8) : null;
                     } else {
                         throw new ClientProtocolException("Unexpected response status: " + status);
                     }
@@ -64,8 +64,8 @@ public class CallApiUtils {
 
         try (CloseableHttpClient httpclient = HttpClientBuilder.create().build();) {
             HttpPost httpPost = new HttpPost(serviceUrl);
-            httpPost.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
-            httpPost.setHeader(HttpHeaders.ACCEPT, "application/json");
+            httpPost.setHeader(HttpHeaders.CONTENT_TYPE, Constants.application_json);
+            httpPost.setHeader(HttpHeaders.ACCEPT, Constants.application_json);
             StringEntity params = new StringEntity(json.toString());
             httpPost.setEntity(params);
 
@@ -75,7 +75,7 @@ public class CallApiUtils {
                     int status = response.getStatusLine().getStatusCode();
                     if (status == 200) {
                         HttpEntity entity = response.getEntity();
-                        return entity != null ? EntityUtils.toString(entity, "UTF-8") : null;
+                        return entity != null ? EntityUtils.toString(entity, Constants.UTF_8) : null;
                     } else {
                         throw new ClientProtocolException("Unexpected response status: " + status);
                     }

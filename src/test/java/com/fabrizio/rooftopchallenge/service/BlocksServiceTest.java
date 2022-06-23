@@ -16,6 +16,7 @@ import static org.mockito.Mockito.when;
 import com.fabrizio.rooftopchallenge.data.TestData;
 import com.fabrizio.rooftopchallenge.dto.BlocksResponseDTO;
 import com.fabrizio.rooftopchallenge.exception.WebException;
+import com.fabrizio.rooftopchallenge.service.impl.BlocksServiceImpl;
 import com.fabrizio.rooftopchallenge.utils.CallApiUtils;
 
 import org.junit.jupiter.api.DisplayName;
@@ -40,7 +41,7 @@ public class BlocksServiceTest {
     private Environment environment;
 
     @InjectMocks
-    private BlocksService blocksService;
+    private BlocksServiceImpl blocksService;
 
     @Nested
     @DisplayName("Check Tests")

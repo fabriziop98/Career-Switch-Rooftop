@@ -14,6 +14,7 @@ import java.util.Map;
 
 import com.fabrizio.rooftopchallenge.data.TestData;
 import com.fabrizio.rooftopchallenge.exception.WebException;
+import com.fabrizio.rooftopchallenge.service.impl.TokenServiceImpl;
 import com.fabrizio.rooftopchallenge.utils.CallApiUtils;
 
 import org.junit.jupiter.api.DisplayName;
@@ -35,7 +36,7 @@ public class TokenServiceTest {
     private CallApiUtils callApiUtils;
 
     @InjectMocks
-    private TokenService tokenService;
+    private TokenServiceImpl tokenService;
 
     @Nested
     @DisplayName("getRooftopToken tests")
